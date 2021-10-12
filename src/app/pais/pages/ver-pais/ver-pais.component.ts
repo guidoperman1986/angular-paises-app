@@ -19,7 +19,7 @@ export class VerPaisComponent implements OnInit {
     this.ar.params
       .pipe(
         switchMap(({id})=>this.paisService.getPaisPorCode(id)),
-        tap((data)=>{console.log(data)})
+        /* tap((data)=>{console.log(data)}) */
       )
       .subscribe((pais)=>{
         this.pais = pais;
