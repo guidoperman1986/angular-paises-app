@@ -5,9 +5,10 @@ import { Country } from '../../interfaces/pais.interface';
 import { PaisService } from '../../services/pais.service';
 
 @Component({
-  selector: 'app-ver-pais',
-  templateUrl: './ver-pais.component.html',
-  styleUrls: ['./ver-pais.component.css']
+    selector: 'app-ver-pais',
+    templateUrl: './ver-pais.component.html',
+    styleUrls: ['./ver-pais.component.css'],
+    standalone: false
 })
 export class VerPaisComponent implements OnInit {
 

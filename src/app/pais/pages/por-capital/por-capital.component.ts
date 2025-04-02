@@ -3,9 +3,10 @@ import { Country } from '../../interfaces/pais.interface';
 import { PaisService } from '../../services/pais.service';
 
 @Component({
-  selector: 'app-por-capital',
-  templateUrl: './por-capital.component.html',
-  styleUrls: ['./por-capital.component.css']
+    selector: 'app-por-capital',
+    templateUrl: './por-capital.component.html',
+    styleUrls: ['./por-capital.component.css'],
+    standalone: false
 })
 export class PorCapitalComponent implements OnInit {
   termino!: string;

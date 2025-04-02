@@ -3,9 +3,10 @@ import { Country } from '../../interfaces/pais.interface';
 import { PaisService } from '../../services/pais.service';
 
 @Component({
-  selector: 'app-por-region',
-  templateUrl: './por-region.component.html',
-  styleUrls: ['./por-region.component.css']
+    selector: 'app-por-region',
+    templateUrl: './por-region.component.html',
+    styleUrls: ['./por-region.component.css'],
+    standalone: false
 })
 export class PorRegionComponent implements OnInit {
 
