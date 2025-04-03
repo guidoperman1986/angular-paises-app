@@ -8,7 +8,7 @@ import { Country } from '../interfaces/pais.interface';
   providedIn: 'root',
 })
 export class PaisService {
-  private apiUrl = 'https://restcountries.com/v2';
+  private apiUrl = 'https://restcountries.com/v3.1';
   error!: boolean;
 
   constructor(private http: HttpClient) {}
