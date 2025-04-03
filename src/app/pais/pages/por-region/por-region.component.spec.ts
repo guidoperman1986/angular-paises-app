@@ -8,8 +8,8 @@ describe('PorRegionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PorRegionComponent ]
-    })
+    imports: [PorRegionComponent]
+})
     .compileComponents();
   });
 

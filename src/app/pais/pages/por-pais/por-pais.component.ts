@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Country } from '../../interfaces/pais.interface';
 import { PaisService } from '../../services/pais.service';
+import { PaisInputComponent } from '../../components/pais-input/pais-input.component';
+import { NgIf, NgFor } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { PaisTableComponent } from '../../components/pais-table/pais-table.component';
 
 @Component({
     selector: 'app-por-pais',
     templateUrl: './por-pais.component.html',
     styleUrls: ['./por-pais.component.css'],
-    standalone: false
+    imports: [PaisInputComponent, NgIf, NgFor, RouterLink, PaisTableComponent]
 })
 export class PorPaisComponent implements OnInit {
   termino!: string;

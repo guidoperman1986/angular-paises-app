@@ -8,8 +8,8 @@ describe('PorCapitalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PorCapitalComponent ]
-    })
+    imports: [PorCapitalComponent]
+})
     .compileComponents();
   });
 

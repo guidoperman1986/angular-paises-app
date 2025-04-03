@@ -1,12 +1,13 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-pais-input',
     templateUrl: './pais-input.component.html',
     styleUrls: ['./pais-input.component.css'],
-    standalone: false
+    imports: [FormsModule]
 })
 export class PaisInputComponent implements OnInit {
   termino!: string;

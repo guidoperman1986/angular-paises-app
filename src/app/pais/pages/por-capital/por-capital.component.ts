@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Country } from '../../interfaces/pais.interface';
 import { PaisService } from '../../services/pais.service';
+import { PaisInputComponent } from '../../components/pais-input/pais-input.component';
+import { NgIf } from '@angular/common';
+import { PaisTableComponent } from '../../components/pais-table/pais-table.component';
 
 @Component({
     selector: 'app-por-capital',
     templateUrl: './por-capital.component.html',
     styleUrls: ['./por-capital.component.css'],
-    standalone: false
+    imports: [PaisInputComponent, NgIf, PaisTableComponent]
 })
 export class PorCapitalComponent implements OnInit {
   termino!: string;

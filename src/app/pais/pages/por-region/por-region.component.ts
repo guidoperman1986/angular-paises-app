@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Country } from '../../interfaces/pais.interface';
 import { PaisService } from '../../services/pais.service';
+import { NgFor, TitleCasePipe } from '@angular/common';
+import { PaisTableComponent } from '../../components/pais-table/pais-table.component';
 
 @Component({
     selector: 'app-por-region',
     templateUrl: './por-region.component.html',
     styleUrls: ['./por-region.component.css'],
-    standalone: false
+    imports: [NgFor, PaisTableComponent, TitleCasePipe]
 })
 export class PorRegionComponent implements OnInit {
 

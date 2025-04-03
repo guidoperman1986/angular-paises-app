@@ -3,12 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { switchMap, tap } from 'rxjs/operators';
 import { Country } from '../../interfaces/pais.interface';
 import { PaisService } from '../../services/pais.service';
+import { NgIf, DecimalPipe } from '@angular/common';
 
 @Component({
     selector: 'app-ver-pais',
     templateUrl: './ver-pais.component.html',
     styleUrls: ['./ver-pais.component.css'],
-    standalone: false
+    imports: [NgIf, DecimalPipe]
 })
 export class VerPaisComponent implements OnInit {
 
