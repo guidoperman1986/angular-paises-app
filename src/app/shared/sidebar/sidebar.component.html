@@ -1,9 +1,27 @@
-
-    <h2>Busquedas</h2>
-    <hr>
-
-    <ul class="list-group">
-      <li class="list-group-item" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Buscar pais</li>
-      <li class="list-group-item" routerLink="region" routerLinkActive="active">Por region</li>
-      <li class="list-group-item" routerLink="capital" routerLinkActive="active">Por capital</li>
+<div class="container">
+  <div class="bg-light border rounded-3 p-1 h-100 sticky-top">
+    <ul class="nav nav-pills flex-sm-column flex-row mb-auto justify-content-between text-truncate">
+      <li class="nav-item">
+        <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+          class="nav-link px-2 text-truncate">
+          <i class="bi bi-house fs-5"></i>
+          <span class="d-none d-sm-inline">By Country</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="region" routerLinkActive="active" class="nav-link px-2 text-truncate" routerLink="region"
+          routerLinkActive="active">
+          <i class="bi bi-speedometer fs-5"></i>
+          <span class="d-none d-sm-inline">By Region</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="capital" routerLinkActive="active" class="nav-link px-2 text-truncate"><i
+            class="bi bi-card-text fs-5"></i>
+          <span class="d-none d-sm-inline">By Capital</span> </a>
+      </li>
     </ul>
+  </div>
+
+
+</div>
