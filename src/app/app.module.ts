@@ -6,11 +6,14 @@ import { AppComponent } from './app.component';
 import { PaisModule } from './pais/pais.module';
 import { SharedModule } from './shared/shared.module';
 import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
-@NgModule({ declarations: [
+import { HeaderComponent } from "./shared/header/header.component";
+@NgModule({
+    declarations: [
         AppComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         PaisModule,
         SharedModule,
-        AppRoutingModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        AppRoutingModule, HeaderComponent], providers: [provideHttpClient(withInterceptorsFromDi())]
+})
 export class AppModule { }
