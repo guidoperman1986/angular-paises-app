@@ -1,28 +1,21 @@
-<h2>Por Pais</h2>
+<h2>By Country</h2>
 <hr>
 
 <div class="row">
     <div class="col">
-        <app-pais-input 
-            placeholder="Por pais..." 
-            (onDebounce)="sugerencias($event)" 
+        <app-pais-input placeholder="Type your Country..." (onDebounce)="sugerencias($event)"
             (onEnter)="buscar($event)">
         </app-pais-input>
     </div>
 </div>
 
 <ul class="list-group" *ngIf="mostrarSugerencias">
-    <li 
-        class="list-group-item list-group-item-action"
-        *ngFor="let pais of paisesSugeridos"
-    >
-        <a class="nav-link" [routerLink]="['/pais', pais.alpha2Code]">
-            {{ pais.name }}
+    <li class="list-group-item list-group-item-action" *ngFor="let pais of sugestedCountries()">
+        <a class="nav-link" [routerLink]="['/pais', pais.cioc]">  
+            {{ pais.name.common }}
         </a>
     </li>
-    <li class="list-group-item list-group-item-action"
-        (click)="buscarSugerido(termino)"
-    >
+    <li class="list-group-item list-group-item-action" (click)="buscarSugerido(termino)">
         <a class="nav-link">
             Buscar "{{ termino }}"
         </a>

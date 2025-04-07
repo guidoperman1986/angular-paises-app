@@ -4,7 +4,8 @@
             autocomplete="off"
             class="form-control"
             [(ngModel)]="termino"
-            [placeholder]="placeholder"
-            (input)="teclaPresionada()"
+            [placeholder]="placeholder()"
+            (keyup)="searchTerm()"
+            #searchInput
     >
 </form>
