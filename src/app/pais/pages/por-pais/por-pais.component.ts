@@ -30,6 +30,10 @@ export class PorPaisComponent implements OnInit {
     this.paisService.searchCountry(termino).subscribe(
       (countrys: Country[] | Country) => {
         if (Array.isArray(countrys)) {
+          if (countrys.length === 0) {
+            this.hayError = true;
+          }
+
           this.paises = countrys;
         } else {
           this.paises = [];
