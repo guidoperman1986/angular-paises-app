@@ -4,7 +4,7 @@ import { PorPaisComponent } from './por-pais.component';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
 import { PaisService } from '../../services/pais.service';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 const results = [
   {
@@ -79,4 +79,50 @@ describe('PorPaisComponent', () => {
     expect(component.paises.length).toBe(0);
     expect(component.hayError).toBe(true);
   });
+
+  it('should handle error when search throws an error', () => {
+    mockCountryService.searchCountry.and.returnValue(throwError(() => new Error('Error occurred')));
+
+    component.buscar('ARG');
+    expect(mockCountryService.searchCountry).toHaveBeenCalledWith('ARG');
+    expect(component.paises.length).toBe(0);
+    expect(component.hayError).toBe(false);
+  });
+
+  it('should set suggested countries when searchCountry returns results', () => {
+    const mockCountries = [
+      { name: { common: 'Argentina' }, capital: ['Buenos Aires'], flags: { svg: 'arg.svg' } },
+      { name: { common: 'Armenia' }, capital: ['Yerevan'], flags: { svg: 'arm.svg' } },
+    ];
+
+    mockCountryService.searchCountry.and.returnValue(of(mockCountries));
+
+    component.sugerencias('Arg');
+
+    expect(mockCountryService.searchCountry).toHaveBeenCalledWith('Arg');
+    console.log(component.sugestedCountries());
+    /* expect(component.sugestedCountries()).toEqual(mockCountries.slice(0, 5)); // Verify the first 5 results */
+    expect(component.hayError).toBe(false); // Ensure no error is set
+  });
+
+  it('should set empty suggested countries and hayError to true when searchCountry throws an error', () => {
+    mockCountryService.searchCountry.and.returnValue(throwError(() => new Error('Error occurred')));
+
+    component.sugerencias('Arg');
+
+    expect(mockCountryService.searchCountry).toHaveBeenCalledWith('Arg');
+    expect(component.sugestedCountries()).toEqual([]); // Verify that suggestions are cleared
+    expect(component.hayError).toBe(true); // Ensure error is set
+  });
+
+  it('should set empty suggested countries when searchCountry returns an empty array', () => {
+    mockCountryService.searchCountry.and.returnValue(of([]));
+
+    component.sugerencias('Arg');
+
+    expect(mockCountryService.searchCountry).toHaveBeenCalledWith('Arg');
+    expect(component.sugestedCountries()).toEqual([]); // Verify that suggestions are cleared
+    expect(component.hayError).toBe(false); // Ensure no error is set
+  });
+
 });
