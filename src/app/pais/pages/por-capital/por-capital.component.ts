@@ -16,7 +16,6 @@ export class PorCapitalComponent implements OnInit {
   hayError!: boolean;
   paises: Country[] = [];
 
-
   constructor(private paisService: PaisService) {}
 
   ngOnInit(): void {}

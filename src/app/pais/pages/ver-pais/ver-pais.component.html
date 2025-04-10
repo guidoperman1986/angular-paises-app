@@ -1,48 +1,48 @@
-<div 
-    *ngIf="!pais; else divPais" 
-    class="alert alert-info">
-    Espere por favor...
-</div>
+@let country = rxCountries;
 
-<ng-template #divPais>
-    <div
-        #divPais
-        class="row">
+@if (country.isLoading()) {
+    <div class="alert alert-info">
+        Espere por favor...
+    </div>
+} @else {
+    @let pais = country.value();
+
+    <div #divPais class="row">
         <div class="col-12">
-            <h1>Pais: <small>{{pais?.name}}</small></h1>
+            <h1>Country: <small>{{ pais?.name.common }}</small></h1>
         </div>
     </div>
-
+    
     <div class="row">
         <div class="col-4">
-            <h3>Bandera</h3>
+            <h3>Flag</h3>
             <img [src]="pais.flags.png" alt="" class="img-thumbnail">
         </div>
-
+    
         <div class="col">
-            <h3>Informacion</h3>
+            <h3>Information</h3>
             <ul class="list-group">
                 <li class="list-group-item">
-                    <strong>Poblacion</strong> {{pais.population | number}}
+                    <strong>Population</strong> {{pais.population | number}}
                 </li>
                 <li class="list-group-item">
-                    <!-- <strong>Codigo numerico</strong> {{pais.numericCode | number}} -->
+                    <strong>Capital</strong> {{ pais.capital }}
                 </li>
                 <li class="list-group-item">
-                    <!-- <strong>Codigo alpha3</strong> {{pais.alpha3Code}} -->
+                    <strong>Alpha 3 code</strong> {{ pais.alpha3Code }}
                 </li>
             </ul>
         </div>
     </div>
-
-    <h3>Traducciones</h3>
+    
+    <h3>Translations</h3>
     <div class="row">
         <div class="col">
-            <!-- <span class="badge bg-primary margin-right">{{pais.translations?.de}}</span>
-            <span class="badge bg-primary margin-right">{{pais.translations?.es}}</span>
-            <span class="badge bg-primary margin-right">{{pais.translations?.fr}}</span>
-            <span class="badge bg-primary margin-right">{{pais.translations?.ja}}</span> -->
+            <span class="badge bg-primary margin-right">{{pais.translations?.deu.common}}</span>
+            <span class="badge bg-primary margin-right">{{pais.translations?.spa.common}}</span>
+            <span class="badge bg-primary margin-right">{{pais.translations?.fra.common}}</span>
+            <span class="badge bg-primary margin-right">{{pais.translations?.jpn.common}}</span>
         </div>
     </div>
-</ng-template>
+}
 

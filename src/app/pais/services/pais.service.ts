@@ -23,7 +23,7 @@ export class PaisService {
   }
 
   get httpParams(): HttpParams {
-    return new HttpParams().set('fields', 'name,capital,alpha2Code,flags,population')
+    return new HttpParams().set('fields', 'name,capital,alpha2Code,flags,population,translations');
   }
 
   buscarCapital(termino: string): Observable<Country[]> {

@@ -1,30 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { rxResource } from "@angular/core/rxjs-interop";
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, tap } from 'rxjs/operators';
-import { Country } from '../../interfaces/pais.interface';
 import { PaisService } from '../../services/pais.service';
-import { NgIf, DecimalPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-ver-pais',
-    templateUrl: './ver-pais.component.html',
-    styleUrls: ['./ver-pais.component.css'],
-    imports: [NgIf, DecimalPipe]
+  selector: 'app-ver-pais',
+  templateUrl: './ver-pais.component.html',
+  styleUrls: ['./ver-pais.component.css'],
+  imports: [DecimalPipe]
 })
-export class VerPaisComponent implements OnInit {
+export class VerPaisComponent {
 
-  pais!: Country;
+  ar = inject(ActivatedRoute);
+  paisService = inject(PaisService);
 
-  constructor(private ar: ActivatedRoute, private paisService: PaisService) { }
-
-  ngOnInit(): void {
-    this.ar.params
-      .pipe(
-        switchMap(({id})=>this.paisService.getPaisPorCode(id)),
-      )
-      .subscribe((pais)=>{
-        this.pais = pais;
-    });
-  }
+  rxCountries = rxResource<any, string>({
+    request: () => this.ar.snapshot.params['id'],
+    loader: ({ request }) => this.paisService.getPaisPorCode(request),
+  })
 
 }
