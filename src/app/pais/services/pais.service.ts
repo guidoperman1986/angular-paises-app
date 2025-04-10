@@ -11,14 +11,14 @@ export class PaisService {
   private apiUrl = 'https://restcountries.com/v3.1';
   error!: boolean;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  searchCountry( term: string ): Observable<Country[]> {
+  searchCountry(term: string): Observable<Country[]> {
 
-    const url = `${ this.apiUrl }/name/${ term }`;
-    return this.http.get<Country[]>( url )
+    const url = `${this.apiUrl}/name/${term}`;
+    return this.http.get<Country[]>(url)
       .pipe(
-        catchError( () => of([]) )
+        catchError(() => of([]))
       );
   }
 
@@ -31,12 +31,12 @@ export class PaisService {
     return this.http.get<Country[]>(url, { params: this.httpParams });
   }
 
-  getPaisPorCode(id: string): Observable<Country>{
+  getPaisPorCode(id: string): Observable<Country> {
     const url = `${this.apiUrl}/alpha/${id}`;
     return this.http.get<Country>(url, { params: this.httpParams });
   }
 
-  buscarRegion(region: string): Observable<Country[]>{
+  buscarRegion(region: string): Observable<Country[]> {
     const url = `${this.apiUrl}/regionalbloc/${region}?`;
     return this.http.get<Country[]>(url, { params: this.httpParams });
   }
