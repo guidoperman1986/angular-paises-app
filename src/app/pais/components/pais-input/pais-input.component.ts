@@ -14,6 +14,7 @@ export class PaisInputComponent implements OnInit {
   hayError!: boolean;
   onEnter = output<string>();
   onDebounce = output<string>();
+  onClearInput = output();
   placeholder = input<string>();
 
   debouncer: Subject<string> = new Subject();
@@ -21,7 +22,7 @@ export class PaisInputComponent implements OnInit {
   ngOnInit(): void {
     this.debouncer
       .pipe(
-        debounceTime(300), 
+        debounceTime(300),
         filter(valor => valor.length > 0),
         distinctUntilChanged()
       )
@@ -36,5 +37,10 @@ export class PaisInputComponent implements OnInit {
 
   searchTerm() {
     this.debouncer.next(this.termino)
+  }
+
+  clearInput() {
+    this.termino = '';
+    this.onClearInput.emit();
   }
 }

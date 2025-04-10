@@ -75,4 +75,11 @@ export class PorPaisComponent implements OnInit {
 
   }
 
+  onClearInput($event: void) {
+    this.termino = '';
+    this.sugestedCountries.set([]);
+    this.paises = [];
+
+  }
+
 }

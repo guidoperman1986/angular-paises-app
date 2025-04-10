@@ -1,11 +1,16 @@
 <form (ngSubmit)="buscar()">
-    <input type="text"
-            name="termino"
-            autocomplete="off"
-            class="form-control"
-            [(ngModel)]="termino"
-            [placeholder]="placeholder()"
-            (keyup)="searchTerm()"
-            #searchInput
-    >
+    <div class="input-group">
+        <input type="text"
+                name="termino"
+                autocomplete="off"
+                class="form-control"
+                [(ngModel)]="termino"
+                [placeholder]="placeholder()"
+                (keyup)="searchTerm()"
+                #searchInput
+        >
+        <span class="input-group-text" (click)="clearInput()">
+            <i class="fas fa-times"></i>
+        </span>
+    </div>
 </form>
