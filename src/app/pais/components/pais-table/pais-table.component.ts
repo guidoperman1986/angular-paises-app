@@ -1,17 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Country } from '../../interfaces/pais.interface';
-import { NgIf, NgFor, DecimalPipe } from '@angular/common';
+import { DecimalPipe } from '@angular/common';
+import { Component, input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Country } from '../../interfaces/pais.interface';
 
 @Component({
-    selector: 'app-pais-table',
-    templateUrl: './pais-table.component.html',
-    styleUrls: ['./pais-table.component.css'],
-    imports: [NgIf, NgFor, RouterLink, DecimalPipe]
+  selector: 'app-pais-table',
+  templateUrl: './pais-table.component.html',
+  styleUrls: ['./pais-table.component.css'],
+  imports: [RouterLink, DecimalPipe]
 })
 export class PaisTableComponent implements OnInit {
 
-  @Input() paises: Country[] = [];
+  paises = input.required<Country[]>();
 
   constructor() { }
 
