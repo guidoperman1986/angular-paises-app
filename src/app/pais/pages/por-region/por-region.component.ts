@@ -5,14 +5,19 @@ import { NgFor, TitleCasePipe } from '@angular/common';
 import { PaisTableComponent } from '../../components/pais-table/pais-table.component';
 
 @Component({
-    selector: 'app-por-region',
-    templateUrl: './por-region.component.html',
-    styleUrls: ['./por-region.component.css'],
-    imports: [NgFor, PaisTableComponent, TitleCasePipe]
+  selector: 'app-por-region',
+  templateUrl: './por-region.component.html',
+  styleUrls: ['./por-region.component.css'],
+  imports: [NgFor, PaisTableComponent, TitleCasePipe]
 })
 export class PorRegionComponent implements OnInit {
 
-  regiones: string[] = ['EU','EFTA','CARICOM','PA','AU','USAN','EEU','AL','ASEAN','CAIS','CEFTA','NAFTA','SAARC'];
+  regiones: string[] = ['Africa',
+    'Americas',
+    'Asia',
+    'Europe',
+    'Oceania',
+    'Antarctic'];
   regionActiva: string = '';
   paises: Country[] = [];
 
@@ -23,16 +28,16 @@ export class PorRegionComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  activarRegion(region:string){
+  activarRegion(region: string) {
     this.regionActiva = region;
 
-    this.paisService.buscarRegion(region).subscribe(paises=>this.paises = paises);
+    this.paisService.buscarRegion(region).subscribe(paises => this.paises = paises);
   }
 
-  getClassCss(region: string){
-    return (region === this.regionActiva) 
-            ? 'btn btn-primary'
-            : 'btn btn-outline-primary';
+  getClassCss(region: string) {
+    return (region === this.regionActiva)
+      ? 'btn btn-primary'
+      : 'btn btn-outline-primary';
   }
 
 }

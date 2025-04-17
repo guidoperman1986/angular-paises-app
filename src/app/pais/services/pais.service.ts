@@ -28,16 +28,19 @@ export class PaisService {
 
   buscarCapital(termino: string): Observable<Country[]> {
     const url = `${this.apiUrl}/capital/${termino}`;
-    return this.http.get<Country[]>(url, { params: this.httpParams });
+    return this.http.get<Country[]>(url/* , { params: this.httpParams } */);
   }
 
   getPaisPorCode(id: string): Observable<Country> {
+    console.log(this.httpParams);
     const url = `${this.apiUrl}/alpha/${id}`;
     return this.http.get<Country>(url, { params: this.httpParams });
   }
 
   buscarRegion(region: string): Observable<Country[]> {
-    const url = `${this.apiUrl}/regionalbloc/${region}?`;
-    return this.http.get<Country[]>(url, { params: this.httpParams });
+    const params = this.httpParams.append('fields', 'name,capital,alpha2Code,flags,population,translations,cca3');
+
+    const url = `${this.apiUrl}/region/${region}?`;
+    return this.http.get<Country[]>(url, { params });
   }
 }
