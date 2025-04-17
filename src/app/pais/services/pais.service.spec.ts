@@ -113,19 +113,18 @@ describe('PaisService', () => {
       expect(countries).toEqual(mockCountries);
     });
 
-    const req = httpTestingController.expectOne('https://restcountries.com/v3.1/capital/Argentina?fields=name,capital,alpha2Code,flags,population');
+    const req = httpTestingController.expectOne('https://restcountries.com/v3.1/capital/Argentina');
     expect(req.request.method).toBe('GET');
     req.flush(mockCountries); // Simulate a successful response
   });
 
   it('should return an array when the API call for regions is successful', () => {
 
-
     service.buscarRegion('Argentina').subscribe((countries) => {
       expect(countries).toEqual(mockCountries);
     });
 
-    const req = httpTestingController.expectOne('https://restcountries.com/v3.1/regionalbloc/Argentina?fields=name,capital,alpha2Code,flags,population');
+    const req = httpTestingController.expectOne('https://restcountries.com/v3.1/region/Argentina?fields=name,capital,alpha2Code,flags,population,translations,cca3');
     expect(req.request.method).toBe('GET');
     req.flush(mockCountries); // Simulate a successful response
   });
