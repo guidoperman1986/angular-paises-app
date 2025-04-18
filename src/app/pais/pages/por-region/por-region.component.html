@@ -1,26 +1,28 @@
-<h3>Buscar por region: <small>{{regionActiva | titlecase}}</small></h3>
+<h3>Look for region: <small>{{activeRegion() | titlecase}}</small></h3>
 
-<h5>Seleccione la region</h5>
-
+<h5>Select the region</h5>
 <div class="row">
     <div class="col">
         <button 
-                (click)="activarRegion(region)" 
-                [class]="getClassCss(region )" 
-                *ngFor="let region of regiones"
+            (click)="activarRegion(region)" 
+            [class]="getClassCss(region )" 
+            *ngFor="let region of regions()"
         >
             {{region | titlecase}}
         </button>
     </div>
 </div>
 
-<app-pais-table [paises]="paises"></app-pais-table>
+@let regionsFound = rxRegions;
 
-<!-- [class.btn-primary]="region === regionActiva" -->
-
-<!-- 
-    [ngClass]="{
-                    'btn-primary': region === regionActiva, 
-                    'btn-outline-primary': region !== regionActiva
-                }"
- -->
+@if (regionsFound.isLoading()) {
+    <div class="alert alert-info">
+        Loading...
+    </div>
+} @else if (regionsFound.error()) {
+    <div class="alert alert-danger">
+        No results found for term: {{ activeRegion() }}
+    </div>
+} @else if (regionsFound.hasValue()) {   
+    <app-pais-table [paises]="regionsFound.value()!"></app-pais-table>
+}

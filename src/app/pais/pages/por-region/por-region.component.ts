@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { NgFor, TitleCasePipe } from '@angular/common';
+import { Component, inject, signal } from '@angular/core';
+import { PaisTableComponent } from '../../components/pais-table/pais-table.component';
 import { Country } from '../../interfaces/pais.interface';
 import { PaisService } from '../../services/pais.service';
-import { NgFor, TitleCasePipe } from '@angular/common';
-import { PaisTableComponent } from '../../components/pais-table/pais-table.component';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-por-region',
@@ -10,32 +12,36 @@ import { PaisTableComponent } from '../../components/pais-table/pais-table.compo
   styleUrls: ['./por-region.component.css'],
   imports: [NgFor, PaisTableComponent, TitleCasePipe]
 })
-export class PorRegionComponent implements OnInit {
+export class PorRegionComponent {
 
-  regiones: string[] = ['Africa',
+  paisService = inject(PaisService);
+  regions = signal<string[]>(['Africa',
     'Americas',
     'Asia',
     'Europe',
     'Oceania',
-    'Antarctic'];
-  regionActiva: string = '';
+    'Antarctic']);
+  activeRegion = signal<string>('');
   paises: Country[] = [];
 
 
+  rxRegions = rxResource({
+    request: () => {
+      if (this.activeRegion() !== '')
+        return this.activeRegion()
+      else
+        return undefined;
+    },
+    loader: ({ request }) => this.paisService.buscarRegion(request)
 
-  constructor(private paisService: PaisService) { }
-
-  ngOnInit(): void {
-  }
+  })
 
   activarRegion(region: string) {
-    this.regionActiva = region;
-
-    this.paisService.buscarRegion(region).subscribe(paises => this.paises = paises);
+    this.activeRegion.set(region);
   }
 
   getClassCss(region: string) {
-    return (region === this.regionActiva)
+    return (region === this.activeRegion())
       ? 'btn btn-primary'
       : 'btn btn-outline-primary';
   }
