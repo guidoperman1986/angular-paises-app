@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Country } from '../interfaces/pais.interface';
@@ -10,11 +10,11 @@ import { Country } from '../interfaces/pais.interface';
 export class PaisService {
   private apiUrl = 'https://restcountries.com/v3.1';
   error!: boolean;
+  isLoading = signal(false);
 
   constructor(private http: HttpClient) { }
 
   searchCountry(term: string): Observable<Country[]> {
-
     const url = `${this.apiUrl}/name/${term}`;
     return this.http.get<Country[]>(url)
       .pipe(

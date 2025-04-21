@@ -1,5 +1,5 @@
 import { NgFor, TitleCasePipe } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal, TrackByFunction } from '@angular/core';
 import { PaisTableComponent } from '../../components/pais-table/pais-table.component';
 import { Country } from '../../interfaces/pais.interface';
 import { PaisService } from '../../services/pais.service';
@@ -33,8 +33,25 @@ export class PorRegionComponent {
         return undefined;
     },
     loader: ({ request }) => this.paisService.buscarRegion(request)
-
   })
+
+  isLoading = effect(() => {
+    
+    return this.rxRegions.isLoading()
+  });
+  
+  trackById: TrackByFunction<string> = (index: number, region: string) => region;
+
+  constructor() {
+    /* effect(() => {
+      console.log('effect isLoading', this.isLoading);
+      if (this.isLoading) {
+        this.paisService.isLoading.set(this.isLoading);
+      } else {
+        this.paisService.isLoading.set(this.isLoading);
+      }
+    }); */
+  }
 
   activarRegion(region: string) {
     this.activeRegion.set(region);

@@ -6,7 +6,7 @@
         <button 
             (click)="activarRegion(region)" 
             [class]="getClassCss(region )" 
-            *ngFor="let region of regions()"
+            *ngFor="let region of regions(); trackBy: trackById"
         >
             {{region | titlecase}}
         </button>
@@ -15,11 +15,7 @@
 
 @let regionsFound = rxRegions;
 
-@if (regionsFound.isLoading()) {
-    <div class="alert alert-info">
-        Loading...
-    </div>
-} @else if (regionsFound.error()) {
+@if (regionsFound.error()) {
     <div class="alert alert-danger">
         No results found for term: {{ activeRegion() }}
     </div>
