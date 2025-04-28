@@ -14,6 +14,4 @@ import { PaisService } from './pais/services/pais.service';
 })
 export class AppComponent {
   title = 'paisesApp';
-
-  paisService = inject(PaisService);
 }
