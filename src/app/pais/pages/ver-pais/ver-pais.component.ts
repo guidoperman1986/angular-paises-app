@@ -3,12 +3,13 @@ import { Component, inject } from '@angular/core';
 import { rxResource } from "@angular/core/rxjs-interop";
 import { ActivatedRoute } from '@angular/router';
 import { PaisService } from '../../services/pais.service';
+import { LoadingComponent } from "../../../shared/loading/loading.component";
 
 @Component({
   selector: 'app-ver-pais',
   templateUrl: './ver-pais.component.html',
   styleUrls: ['./ver-pais.component.css'],
-  imports: [DecimalPipe]
+  imports: [DecimalPipe, LoadingComponent]
 })
 export class VerPaisComponent {
 
