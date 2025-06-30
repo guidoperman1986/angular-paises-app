@@ -1,4 +1,4 @@
-<h2>By Country</h2>
+<h2 data-test="by-country">By Country</h2>
 <hr>
 
 <div class="row">
@@ -9,7 +9,7 @@
     </div>
 </div>
 
-<ul class="list-group" *ngIf="mostrarSugerencias">
+<ul data-test="suggestions-list" class="list-group" *ngIf="mostrarSugerencias">
     <li class="list-group-item list-group-item-action" *ngFor="let pais of sugestedCountries()">
         <a class="nav-link" [routerLink]="['/pais', pais.cioc]">  
             {{ pais.name.common }}
